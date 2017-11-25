@@ -1,0 +1,66 @@
+{% extends 'ics_tool/base.html' %}
+{% block head %}
+      {{ block.super }}
+      {% load bootstrap3 %}
+
+      {% bootstrap_messages %}
+
+      {% load static %}
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+	    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script type="text/javascript">
+	    $(document).ready(function() {
+		    $( "#datepicker" ).datepicker({
+			     changeMonth: true,
+			     changeYear: true,
+           showButtonPanel: true,
+           dateFormat: 'MM yy',
+           onClose: function(dateText, inst) {
+               $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+           }
+		    });
+	    } );
+      </script>
+{% endblock %}
+
+{% block content %}
+
+      <div class="container">
+        <form action="{% url 'ics_tool:add_item_donation' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+        {% csrf_token %}
+        <div class="container">
+          <h2>Add Item Donation</h2>
+          <br>
+            <!--<div class="form-group">
+              <label class="col-sm-2" for="Item">Item Name</label>
+              <div class="col-sm-4"><input class="form-control" id="Item" name="Item" placeholder="Item Name" type="text"></div>
+            </div>-->
+			<div class="form-group">
+              <label class="col-sm-2" for="ItemDescription">Item Description</label>
+              <div class="col-sm-4"><input class="form-control" id="ItemDescription" name="ItemDescription" placeholder="Item Description" type="text"></div>
+            </div>
+			<div class="form-group">
+              <label class="col-sm-2" for="ItemValue">Item Value (Approx.)</label>
+              <div class="col-sm-4"><input class="form-control" id="ItemValue" name="ItemValue" placeholder="Item Value (Approx.)" type="number"></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2" for="ICS">Is ACK Sent ?</label>
+              <div class="col-sm-1"><input class="form-control" id="ICS" name="ICS" placeholder="Purchase by ICS" type="checkbox"></div>
+            </div>
+         </div>
+
+        {% buttons %}
+
+        <div class="form-group">
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-info pull-right">Save Item</button>
+          </div>
+        </div>
+          {% endbuttons %}
+        </form>
+      </div>
+
+{% endblock %}

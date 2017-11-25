@@ -1,0 +1,58 @@
+{% extends 'ics_tool/base.html' %}
+{% block head %}
+      {{ block.super }}
+      {% load bootstrap3 %}
+
+      {% bootstrap_messages %}
+
+      {% load static %}
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+	    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script type="text/javascript">
+	    $(document).ready(function() {
+		    $( "#datepicker" ).datepicker({
+			     changeMonth: true,
+			     changeYear: true,
+           showButtonPanel: true,
+           dateFormat: 'MM yy',
+           onClose: function(dateText, inst) {
+               $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+           }
+		    });
+	    } );
+      </script>
+{% endblock %}
+
+{% block content %}
+
+      <div class="container">
+        <form action="{% url 'ics_tool:add_monetary_donation' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+        {% csrf_token %}
+        <div class="container">
+          <h2>Add Monetary Donation</h2>
+          <br>
+			<div class="form-group">
+              <label class="col-sm-2" for="Amount">Donation Amount</label>
+              <div class="col-sm-4"><input class="form-control" id="Amount" name="Amount" placeholder="Donation Amount (in $)" type="number"></div>
+            </div>
+			<div class="form-group">
+              <label class="col-sm-2" for="Mode">Mode of Payment</label>
+              <div class="col-sm-4"><input class="form-control" id="Mode" name="Mode" placeholder="Mode of Payment" type="text"></div>
+            </div>
+         </div>
+
+        {% buttons %}
+
+        <div class="form-group">
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-info pull-right">Save $ Donation</button>
+          </div>
+        </div>
+          {% endbuttons %}
+        </form>
+      </div>
+
+{% endblock %}
