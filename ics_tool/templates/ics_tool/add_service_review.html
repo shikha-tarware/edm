@@ -1,0 +1,81 @@
+{% extends 'ics_tool/base.html' %}
+{% block head %}
+      {{ block.super }}
+      {% load bootstrap3 %}
+
+      {% bootstrap_messages %}
+
+      {% load static %}
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+	    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script type="text/javascript">
+	    $(document).ready(function() {
+		    $( "#datepicker" ).datepicker({
+			     changeMonth: true,
+			     changeYear: true,
+           showButtonPanel: true,
+           dateFormat: 'MM yy',
+           onClose: function(dateText, inst) {
+               $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+           }
+		    });
+	    } );
+      </script>
+{% endblock %}
+
+{% block content %}
+
+      <div class="container">
+        <form action="{% url 'ics_tool:add_service_review' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+        {% csrf_token %}
+        <div class="container">
+          <h2>Service Review</h2>
+          <br>
+		
+		<!--Service Should be drop-down with pre-defined values of 'Service Type' and 'Service Description'-->
+			<div class="form-group">
+              <label class="col-sm-2">Customer Name</label>
+              <div class="col-sm-2"><input class="form-control" placeholder="First Name" name="FirstName" type="text"></div>
+              <div class="col-sm-2"><input class="form-control" placeholder="Last Name" name="LastName" type="text"></div>
+            </div>
+			<div class="dropdown">
+				<button onclick="myFunction()" class="dropbtn">Service Type</button>
+				<div id="myDropdown" class="dropdown-content">
+				<a href="#">Link 1</a>
+				<a href="#">Link 2</a>
+				<a href="#">Link 3</a>
+			</div>
+			<div class="form-group">
+              <label class="col-sm-2" for="Comments">Service Date</label>
+              <div class="col-sm-4"><input class="form-control" id="datepicker" name="Date" placeholder="Date" type="text"></div>
+            </div>
+			<div class="dropdown">
+				<button onclick="myFunction()" class="dropbtn">Service Rating</button>
+				<div id="myDropdown" class="dropdown-content">
+				<a href="#">1 Star</a>
+				<a href="#">2 Star</a>
+				<a href="#">3 Star</a>
+				<a href="#">4 Star</a>
+				<a href="#">5 Star</a>
+			</div>
+			<div class="form-group">
+              <label class="col-sm-2" for="Comments">Review Comments</label>
+              <div class="col-sm-4"><input class="form-control" id="Comments" name="Comments" placeholder="Comments" type="text"></div>
+            </div>
+        </form>
+      </div>
+{% buttons %}
+
+        <div class="form-group">
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-info pull-right">Submit Review</button>
+          </div>
+        </div>
+          {% endbuttons %}
+        </form>
+      </div>
+
+{% endblock %}
