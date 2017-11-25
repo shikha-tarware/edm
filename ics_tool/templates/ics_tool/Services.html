@@ -1,0 +1,52 @@
+{% extends 'ics_tool/base.html' %}
+{% block head %}
+      {{ block.super }}
+      {# Load the tag library #}
+      {% load bootstrap3 %}
+
+      {# Load CSS #}
+      {# Bootstrap javascript was not loaded due to compatability issues in using Modal. dataTables.min.js also loads bootsrap js by default #}
+      {# Loading bootstrap js twice would fade the modal immediately #}
+      {% bootstrap_css %}
+
+      {# Display django.contrib.messages as Bootstrap alerts #}
+      {% bootstrap_messages %}
+
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+
+      <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+  <h3>Service Offered</h3>
+    <div class="col-lg-12">
+    <div class="table-responsive">
+    <div class="dataTables_wrapper form-inline dt-bootstrap">
+    <table id="rfx_table" class="table table-list-search table-striped table-bordered table-hover dataTables-example dataTable" style="width=100%;" role="grid">
+    <thead>
+      <tr role="row">
+        <th style="text-align: center;font-family: 'Calibri', Arial, sans-serif ;">Link 1</th>
+		<td style="text-align: center;font-family: 'Calibri', Arial, sans-serif ;">Description 1</td>
+		</tr>
+		
+		<tr role="row">
+		<th style="text-align: center;font-family: 'Calibri', Arial, sans-serif ;">Link 2</th>
+		<td style="text-align: center;font-family: 'Calibri', Arial, sans-serif ;">Description 2</td>
+		 </tr>
+		 
+		<tr role="row">
+		<th style="text-align: center;font-family: 'Calibri', Arial, sans-serif ;">Link 3</th>
+		<td style="text-align: center;font-family: 'Calibri', Arial, sans-serif ;">Description 3</td>
+      </tr>
+    </thead>
+    </table>
+  </div>
+	</div>
+</div>
+</div>
+</div>
